@@ -1,5 +1,9 @@
 export const GlobalStyle = {
-    primaryColor: "#8981D8",
+    primaryColor: "#AD3157",
     secondColor: "#FFFFFF",
-    background: "#F9F9F9"
+    background: "#F9F9F9",
+    linkColor: "#331733"
+}
+export const Font = {
+    myTextFont: "Poppins"
 }
