@@ -78,5 +78,11 @@ export const Wrapper = styled.nav`
                 color: ${GlobalStyle.primaryColor};
             }
         }
+        .notes{
+            margin-top: 40px;
+            border-radius: 12px;
+            width: 100%;
+            background-color: ${GlobalStyle.background};
+        }
     }
 `

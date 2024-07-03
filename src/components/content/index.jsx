@@ -40,6 +40,13 @@ export const Content = () => {
           <span className="ative">Fitness</span>
           <span>Reunião</span>
         </div>
+        <div className="notes">
+            {
+                userInfo.notes?.length === 0 && (
+                    <span>Voce ainda não criou nenhuma nota!</span>
+                )
+            }
+        </div>
       </div>
     </Wrapper>
   );
