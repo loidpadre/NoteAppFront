@@ -24,6 +24,15 @@ export const Home = () => {
     e.preventDefault();
     setShowSingup(!showSingup);
   };
+
+
+
+  useEffect(() => {
+    fetch(`${URL}/users`)
+      .then((response) => response.json())
+      .then((data) => setUsers(data.data))
+      .catch((err) => console.log("Erro ao buscar usuários!", err));
+  }, []);
   const handleCreateAcount = async (e) => {
     e.preventDefault();
     try {
@@ -99,13 +108,8 @@ export const Home = () => {
 
 
 
-  useEffect(() => {
-    fetch(`${URL}/users`)
-      .then((response) => response.json())
-      .then((data) => setUsers(data.data))
-      .catch((err) => console.log("Erro ao buscar usuários!", err));
-  }, []);
-  // logar configuration
+  
+  // logar function
   const handleSingIn = async (e) =>{
     e.preventDefault()
     try {
@@ -134,6 +138,8 @@ export const Home = () => {
         
 
         toast("Login efetuado com sucesso...")
+        const userId = user._id
+        localStorage.setItem("id", userId)
         setTimeout(() =>{
             navigate("/dash")
         },3000)

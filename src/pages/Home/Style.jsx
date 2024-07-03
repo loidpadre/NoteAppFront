@@ -5,7 +5,11 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
   .container {
+    .fail{
+    background-color: red;
+  }
     display: flex;
     align-items: center;
     justify-content: center;
