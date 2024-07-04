@@ -1,6 +1,8 @@
 import { FaSearch } from "react-icons/fa";
 import { Wrapper } from "./style";
 import { useEffect, useState } from "react";
+import { RiAddCircleFill } from "react-icons/ri";
+import { NoteCard } from "../notesCard";
 export const Content = () => {
   const [userInfo, setUserInfo] = useState({});
   const URL = "https://noteapp-rjhm.onrender.com";
@@ -13,7 +15,12 @@ export const Content = () => {
         console.log("Erro ao buscar informações de usuario", err)
       );
   }, []);
-  const initials = userInfo.name ? userInfo.name.split(' ').map(word => word.charAt(0).toUpperCase()).join('') : '';
+  const initials = userInfo.name
+    ? userInfo.name
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase())
+        .join("")
+    : "";
   return (
     <Wrapper>
       <div className="top">
@@ -32,20 +39,34 @@ export const Content = () => {
       </div>
       <div className="content">
         <h1>
-          Bem vindo de novo, <span>{userInfo.name}</span>
+          Bem vindo de Volta, <span>{userInfo.name}</span>
         </h1>
         <span>Gerencia as suas notas, com facilidade, e tranquilidade</span>
-        <div className="tags">
-          <span>Programação</span>
-          <span className="ative">Fitness</span>
-          <span>Reunião</span>
+        <div className="tagAndCreat">
+          <div className="tags">
+           {
+            !userInfo.notes?.length === 0 && (
+              <span className="ative">All</span>
+            )
+           }
+            {
+              userInfo.notes?.map(note => (
+                <span>{note.tag}</span>
+              ))
+            }
+          </div>
+          <div className="create">
+            <RiAddCircleFill className="icon" />
+            <span>Criar nova nota</span>
+          </div>
         </div>
         <div className="notes">
-            {
-                userInfo.notes?.length === 0 && (
-                    <span>Voce ainda não criou nenhuma nota!</span>
-                )
-            }
+          {userInfo.notes?.length === 0 && (
+            <span>Voce ainda não criou nenhuma nota!</span>
+          )}
+          {userInfo.notes?.map((note) => (
+            <NoteCard note={note} />
+          ))}
         </div>
       </div>
     </Wrapper>

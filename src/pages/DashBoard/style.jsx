@@ -4,5 +4,6 @@ export const Wrapper = styled.div`
     margin: 0 auto;
     .container{
         display: flex;
+        justify-content: space-between;
     }
 `

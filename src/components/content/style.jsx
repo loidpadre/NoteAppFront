@@ -36,6 +36,7 @@ export const Wrapper = styled.nav`
             display: flex;
             align-items: center;
             justify-content: center;
+            color: ${GlobalStyle.primaryColor};
             span{
                 font-weight: 600;
             }
@@ -60,7 +61,11 @@ export const Wrapper = styled.nav`
                 color: ${GlobalStyle.primaryColor};
             }
         }
-        .tags{
+        .tagAndCreat{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .tags{
             display: flex;
             gap: 10px;
             margin-top: 20px;
@@ -78,11 +83,31 @@ export const Wrapper = styled.nav`
                 color: ${GlobalStyle.primaryColor};
             }
         }
+        .create{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            span{
+                font-weight: 600;
+            }
+            .icon{
+                font-size: 26px;
+                color: ${GlobalStyle.primaryColor};
+            }
+        }
+        }
+        
         .notes{
+            overflow-y: auto;
             margin-top: 40px;
             border-radius: 12px;
             width: 100%;
             background-color: ${GlobalStyle.background};
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 10px;
         }
     }
 `
