@@ -10,14 +10,41 @@ export const Wrapper = styled.div`
         display: flex;
         justify-content: space-between;
         align-items:center;
+        position: relative;
         .icon{
             cursor: pointer;
         }
+        .modal{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            span{
+                color: ${GlobalStyle.primaryColor};
+            }
+            background-color: ${GlobalStyle.background};
+            border-radius: 10px;
+            position: absolute;
+            padding: 10px;
+            right: 4px;
+            top: 30px;
+            .editar{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            .deletar{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+        
     }
     span{
         color: gray;
 
     }
+    
     .text{
         h4{
           color: ${GlobalStyle.primaryColor};

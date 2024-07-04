@@ -3,8 +3,10 @@ import { Wrapper } from "./style";
 import { useEffect, useState } from "react";
 import { RiAddCircleFill } from "react-icons/ri";
 import { NoteCard } from "../notesCard";
+import { ModalCreate } from "../ModalCreate/Index";
 export const Content = () => {
   const [userInfo, setUserInfo] = useState({});
+  const [openModalCreate, setOpenModalCreate] = useState(false)
   const URL = "https://noteapp-rjhm.onrender.com";
   useEffect(() => {
     const id = localStorage.getItem("id");
@@ -21,6 +23,20 @@ export const Content = () => {
         .map((word) => word.charAt(0).toUpperCase())
         .join("")
     : "";
+
+    const handleOpenModal = () =>{
+        setOpenModalCreate(!openModalCreate)
+    }
+
+
+    useEffect(() => {
+      const uniqueTags = new Set();
+      userInfo.notes?.forEach(note => {
+          uniqueTags.add(note.tag);
+      });
+      setTags(uniqueTags);
+  }, [userInfo.notes]);
+  const [tags, setTags] = useState(new Set());
   return (
     <Wrapper>
       <div className="top">
@@ -44,18 +60,19 @@ export const Content = () => {
         <span>Gerencia as suas notas, com facilidade, e tranquilidade</span>
         <div className="tagAndCreat">
           <div className="tags">
-           {
-            !userInfo.notes?.length === 0 && (
+           
               <span className="ative">All</span>
-            )
-           }
-            {
-              userInfo.notes?.map(note => (
-                <span>{note.tag}</span>
-              ))
-            }
+            
+             {Array.from(tags).map(tag => (
+                <span key={tag}>{tag}</span>
+            ))}
           </div>
-          <div className="create">
+         {
+          openModalCreate && (
+            <ModalCreate handleOpenModal={handleOpenModal}/>
+          )
+         }
+          <div className="create" onClick={handleOpenModal}>
             <RiAddCircleFill className="icon" />
             <span>Criar nova nota</span>
           </div>
@@ -65,7 +82,7 @@ export const Content = () => {
             <span>Voce ainda não criou nenhuma nota!</span>
           )}
           {userInfo.notes?.map((note) => (
-            <NoteCard note={note} />
+            <NoteCard key={note._id} note={note} />
           ))}
         </div>
       </div>
