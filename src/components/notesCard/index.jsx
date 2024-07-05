@@ -4,12 +4,14 @@ import { Wrapper } from "./style";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ModalEdit } from "../ModalEdit";
 export const NoteCard = ({ note }) => {
   const date = new Date(note.createdAt);
   const day = date.getDate();
   const year = date.getFullYear();
   const month = date.toLocaleString("pt-BR", { month: "long" });
   const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false)
   const handleOpenModalDelete = () => {
     setOpenModalDelete(!openModalDelete);
   };
@@ -34,6 +36,13 @@ export const NoteCard = ({ note }) => {
         console.log(error)
       }
   }
+
+  const openModalEdit = (id) =>{
+    setOpenEdit(!openEdit)
+  }
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [tag, setTag] = useState("")
   return (
     <Wrapper>
       <ToastContainer/>
@@ -45,7 +54,7 @@ export const NoteCard = ({ note }) => {
           <span>Deletar</span>
           <MdDelete />
         </div>
-        <div className="editar">
+        <div className="editar" onClick={() => openModalEdit(note._id)}>
           <span>Editar</span>
           <MdEditDocument />
         </div>
@@ -64,6 +73,13 @@ export const NoteCard = ({ note }) => {
         <h1 className="title">{note.title}</h1>
         <span>{note.content}</span>
         <h4>#{note.tag}</h4>
+      </div>
+      <div className="edit">
+        {
+          openEdit && (
+            <ModalEdit openModalEdit={openModalEdit} note={note} />
+          )
+        }
       </div>
     </Wrapper>
   );

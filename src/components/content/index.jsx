@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { RiAddCircleFill } from "react-icons/ri";
 import { NoteCard } from "../notesCard";
 import { ModalCreate } from "../ModalCreate/Index";
+import { CgLogOut } from "react-icons/cg";
+import { Link } from "react-router-dom";
 export const Content = () => {
   const [userInfo, setUserInfo] = useState({});
   const [openModalCreate, setOpenModalCreate] = useState(false)
+  const [openExit, setOpenExit] = useState(false)
   const URL = "https://noteapp-rjhm.onrender.com";
   useEffect(() => {
     const id = localStorage.getItem("id");
@@ -37,6 +40,15 @@ export const Content = () => {
       setTags(uniqueTags);
   }, [userInfo.notes]);
   const [tags, setTags] = useState(new Set());
+
+
+  // open exit
+  const handleOpenExit = () =>{
+      setOpenExit(!openExit)
+  }
+  const handleLogout = () =>{
+      window.location.replace("/")
+  }
   return (
     <Wrapper>
       <div className="top">
@@ -45,9 +57,14 @@ export const Content = () => {
           <input type="text" placeholder="Pesquisar Nota" />
         </div>
         <div className="profile">
-          <div className="box">
-            <span>{initials}</span>
+          <div className="box" onClick={handleOpenExit}>
+            <span >{initials}</span>
+            
           </div>
+          <div className={openExit ? "exitArea show":  `exitArea`} onClick={handleLogout}>
+              <CgLogOut />
+              <span>Sair da sua conta</span>
+            </div>
           <h1>
             Olá, <span>{userInfo.name}</span>
           </h1>
@@ -82,7 +99,7 @@ export const Content = () => {
             <span>Voce ainda não criou nenhuma nota!</span>
           )}
           {userInfo.notes?.map((note) => (
-            <NoteCard key={note._id} note={note} />
+            <NoteCard key={note._id} note={note} handleOpenModal={handleOpenModal} />
           ))}
         </div>
       </div>
