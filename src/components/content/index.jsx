@@ -117,7 +117,7 @@ export const Content = () => {
         {filterNote && (
   <>
     {filterNote.length === 0 && (
-      <span>Você ainda não criou nenhuma nota!</span>
+      <span>Você não tem nota!</span>
     )}
     {filterNote.map((note) => (
       <NoteCard key={note._id} note={note} userInfo={userInfo} setUserInfo={setUserInfo} handleOpenModal={handleOpenModal} />
