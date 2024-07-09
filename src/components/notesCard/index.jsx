@@ -5,7 +5,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ModalEdit } from "../ModalEdit";
-export const NoteCard = ({ note }) => {
+export const NoteCard = ({ note, userInfo, setUserInfo }) => {
   const date = new Date(note.createdAt);
   const day = date.getDate();
   const year = date.getFullYear();
@@ -18,6 +18,7 @@ export const NoteCard = ({ note }) => {
 
   const URL = "https://noteapp-rjhm.onrender.com";
   const userId = localStorage.getItem("id")
+  //rota para deletar nota
   const handleDeleteNote = async (id ) =>{
       try {
         const response = await fetch(`${URL}/users/${userId}/${id}`, {
@@ -43,6 +44,9 @@ export const NoteCard = ({ note }) => {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [tag, setTag] = useState("")
+
+  
+
   return (
     <Wrapper>
       <ToastContainer/>

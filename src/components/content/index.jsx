@@ -49,12 +49,31 @@ export const Content = () => {
   const handleLogout = () =>{
       window.location.replace("/")
   }
+
+  //feature pesquisar 
+  const [valueSearch, setValueSearch] = useState("")
+  const [filterNote, setFilterNote] = useState([])
+  useEffect(() =>{
+    const filtrNoted = userInfo.notes?.filter(note => note.title.toLowerCase().includes(valueSearch.toLowerCase()))
+    setFilterNote(filtrNoted)
+    
+    
+  },[userInfo.notes, valueSearch])
+
+  //filtrar pela tag 
+  const handleTag = (tag)=>{
+    const noteFilterByTag = userInfo.notes?.filter(note => note.tag.toLowerCase().includes(tag.toLowerCase()))
+    setFilterNote(noteFilterByTag)
+  }
+  const handleAll = () =>{
+    setFilterNote(userInfo.notes)
+  }
   return (
     <Wrapper>
       <div className="top">
         <div className="search">
           <FaSearch color="gray" />
-          <input type="text" placeholder="Pesquisar Nota" />
+          <input type="text" placeholder="Pesquisar Nota" onChange={(e) => setValueSearch(e.target.value)} value={valueSearch} />
         </div>
         <div className="profile">
           <div className="box" onClick={handleOpenExit}>
@@ -78,10 +97,10 @@ export const Content = () => {
         <div className="tagAndCreat">
           <div className="tags">
            
-              <span className="ative">All</span>
+              <span className="ative" onClick={handleAll}>All</span>
             
              {Array.from(tags).map(tag => (
-                <span key={tag}>{tag}</span>
+                <span key={tag} onClick={() => handleTag(tag)}>{tag}</span>
             ))}
           </div>
          {
@@ -95,12 +114,16 @@ export const Content = () => {
           </div>
         </div>
         <div className="notes">
-          {userInfo.notes?.length === 0 && (
-            <span>Voce ainda não criou nenhuma nota!</span>
-          )}
-          {userInfo.notes?.map((note) => (
-            <NoteCard key={note._id} note={note} handleOpenModal={handleOpenModal} />
-          ))}
+        {filterNote && (
+  <>
+    {filterNote.length === 0 && (
+      <span>Você ainda não criou nenhuma nota!</span>
+    )}
+    {filterNote.map((note) => (
+      <NoteCard key={note._id} note={note} userInfo={userInfo} setUserInfo={setUserInfo} handleOpenModal={handleOpenModal} />
+    ))}
+  </>
+)}
         </div>
       </div>
     </Wrapper>
