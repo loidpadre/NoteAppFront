@@ -12,6 +12,7 @@ export const ModalCreate = ({handleOpenModal}) => {
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [tag, setTag] = useState("")
+    const [progressBar, setProgressBar] = useState(false)
     const newNote = {
         title,
         content,
@@ -34,10 +35,12 @@ export const ModalCreate = ({handleOpenModal}) => {
             if(!response.ok){
                return alert("Erro ao criar Nota, tente Novamente!")
             }
+            setProgressBar(true)
             toast("Nota criada com sucesso!")
-            setTimeout(() =>{
+            
+
                 window.location.reload()
-            },2000)
+
 
         } catch (error) {
             console.log("Erro ao criar nota", error)
@@ -63,7 +66,10 @@ export const ModalCreate = ({handleOpenModal}) => {
           <div className="tags">
             <input type="text" placeholder="Adicionar tag"  onChange={(e) => setTag(e.target.value)}/>
           </div>
-          <button onClick={handleCreateNote}>Criar Nota</button>
+          <button onClick={handleCreateNote}  className="btn">
+            <div className={progressBar ? "box show": "box"}></div>
+            <span className={progressBar ? "hiddem": ""}>Criar Nota</span>
+          </button>
         </form>
       </div>
     </Wrapper>

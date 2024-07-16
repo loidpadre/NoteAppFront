@@ -72,6 +72,37 @@ export const Wrapper = styled.div`
                 cursor: pointer;
                 font-size: 16px;
             }
+            .btn{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                .box {
+                    background-color: ${GlobalStyle.primaryColor};
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                    border-bottom: 1px solid ${GlobalStyle.primaryColor};
+                    animation: circleProgress 1.5s ease infinite;
+                    display: none;
+                }
+                .hiddem{
+                    display: none;
+                }
+
+                @keyframes circleProgress {
+                    to {
+                        transform: rotate(0deg);
+                    }
+                    from {
+                        transform: rotate(360deg);
+                    }
+                }
+                .show{
+                    display: block;
+                }
+            }
         }
     }
 ` 

@@ -88,7 +88,7 @@ export const Home = () => {
         console.log("Usuario cadastrado com sucesso!", data);
         toast("Usuario cadastrado com sucesso!");
         setTimeout(() =>{
-            navigate("/dash")
+            window.location.assign('/')
         },3000)
       }else {
         console.error("Erro ao cadastrar usuário:", response.status);

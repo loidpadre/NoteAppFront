@@ -21,11 +21,12 @@ export const Content = () => {
       );
   }, []);
   const initials = userInfo.name
-    ? userInfo.name
-        .split(" ")
-        .map((word) => word.charAt(0).toUpperCase())
-        .join("")
-    : "";
+  ? userInfo.name
+      .split(" ")
+      .filter((word, index) => index === 0 || index === userInfo.name.split(" ").length - 1)
+      .map((word) => word.charAt(0).toUpperCase())
+      .join("")
+  : "";
 
     const handleOpenModal = () =>{
         setOpenModalCreate(!openModalCreate)

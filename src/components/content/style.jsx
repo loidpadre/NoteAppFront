@@ -71,7 +71,9 @@ export const Wrapper = styled.nav`
       }
 
       .show{
-        right: 200px;
+        right: 50px;
+        background-color: ${GlobalStyle.background};
+        top: 100px;
         opacity: 1;
         z-index: 1;
       }
